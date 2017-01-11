@@ -26,5 +26,20 @@ SIFICEigenstrainModel::modifyStrain(const unsigned int qp,
                                     SymmTensor & /*dstrain_increment_dT*/)
 {
   Real ypos = _q_point[qp](1);
-  strain_increment.xx() -= ypos * ypos / 1e4;
+  Real xpos = _q_point[qp](0);
+  Real t = 0.21971;
+  Real R = 2.1971;
+  Real E = 1e4;
+  Real nu = 0.3;
+
+  Real sigma_zz = 1.0; //uniform
+  // Real sigma_zz = ((1/t)*(sqrt(((xpos-R)*(xpos-R))+(ypos*ypos))-R)); //linear
+  // Real sigma_zz = (((1/t)*(sqrt(((xpos-R)*(xpos-R))+(ypos*ypos))-R))*((1/t)*(sqrt(((xpos-R)*(xpos-R))+(ypos*ypos))-R))); //quadratic
+  // Real sigma_zz = (((1/t)*(sqrt(((xpos-R)*(xpos-R))+(ypos*ypos))-R))*((1/t)*(sqrt(((xpos-R)*(xpos-R))+(ypos*ypos))-R))*((1/t)*(sqrt(((xpos-R)*(xpos-R))+(ypos*ypos))-R))); //cubic
+
+
+  strain_increment.xx() -=  nu * sigma_zz / E;
+  strain_increment.yy() -=  nu * sigma_zz / E;
+  strain_increment.zz() +=  sigma_zz / E;
+
 }

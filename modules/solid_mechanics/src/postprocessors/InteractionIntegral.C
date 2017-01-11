@@ -165,6 +165,38 @@ InteractionIntegral::computeQpIntegral()
     term4 = _scalar_q[_qp] * aux_stress_trace * (*_current_instantaneous_thermal_expansion_coef)[_qp] * grad_temp_cf(0);
   }
 
+  // {
+  // Real aux_stress_trace = _aux_stress[_qp](0,0) + _aux_stress[_qp](1,1) + _aux_stress[_qp](2,2);
+  // Real ypos = _q_point[_qp](1);
+  // Real xpos = _q_point[_qp](0);
+  // RealVectorValue thermstrain;
+  // Real t = 0.21971;
+  // Real R = 2.1971;
+  // Real E = 1e4;
+
+  // linear
+  // Real dthermalstrain_dx = (xpos-R) / (t*E*sqrt(((xpos-R)*(xpos-R))+(ypos*ypos))); //linear
+  // Real dthermalstrain_dy = ypos / (t*E*sqrt(((xpos-R)*(xpos-R))+(ypos*ypos)));  //linear
+
+  // Quadratic
+  // Real dthermalstrain_dx = 2*(xpos-R)*(sqrt((xpos-R)*(xpos-R)+(ypos*ypos))-R)/(E*t*t*sqrt((xpos-R)*(xpos-R)+(ypos*ypos)));
+  // Real dthermalstrain_dy = 2*ypos*(sqrt((xpos-R)*(xpos-R)+(ypos*ypos))-R)/(E*t*t*sqrt((xpos-R)*(xpos-R)+(ypos*ypos)));
+
+  // Cubic
+  // Real dthermalstrain_dx = (3*(xpos-R)*(sqrt((xpos-R)*(xpos-R)+(ypos*ypos))-R)*(sqrt((xpos-R)*(xpos-R)+(ypos*ypos))-R))/(E*t*t*t*sqrt((xpos-R)*(xpos-R)+(ypos*ypos)));
+  // Real dthermalstrain_dy = (3*ypos*(sqrt((xpos-R)*(xpos-R)+(ypos*ypos))-R)*(sqrt((xpos-R)*(xpos-R)+(ypos*ypos))-R))/(E*t*t*t*sqrt((xpos-R)*(xpos-R)+(ypos*ypos)));
+  //
+  // thermstrain(0) = dthermalstrain_dx;
+  // thermstrain(1) = dthermalstrain_dy;
+  // thermstrain(2) = 0.0;
+  // RealVectorValue thermstrain_cf = _crack_front_definition->rotateToCrackFrontCoords(thermstrain, _crack_front_point_index);
+  // term4 = -_scalar_q[_qp] * _aux_stress[_qp](2,2) * thermstrain_cf(0);
+  // }
+
+  // term4 = 0.0;
+
+
+
   Real q_avg_seg = 1.0;
   if (!_crack_front_definition->treatAs2D())
   {

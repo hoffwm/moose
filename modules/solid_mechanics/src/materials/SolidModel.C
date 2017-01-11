@@ -1556,6 +1556,16 @@ SolidModel::computeThermalJvec()
     Real dthermstrain_dx = _temp_grad[_qp](i) * (*_current_instantaneous_thermal_expansion_coef)[_qp];
     (*_J_thermal_term_vec)[_qp](i) = stress_trace * dthermstrain_dx;
   }
+  // Real xpos = _q_point[_qp](0);
+  // Real ypos = _q_point[_qp](1);
+  //
+  // Real dthermalstrain_dx = (0.000455145 * (xpos-2.1971)) / sqrt(((xpos-2.1971)*(xpos-2.1971))+(ypos*ypos));
+  // Real dthermalstrain_dy = (0.000455145 * ypos) / sqrt(((xpos-2.1971)*(xpos-2.1971))+(ypos*ypos));
+  //
+  // (*_J_thermal_term_vec)[_qp](0) = stress_trace * dthermalstrain_dx;
+  // (*_J_thermal_term_vec)[_qp](1) = stress_trace * dthermalstrain_dy;
+  // (*_J_thermal_term_vec)[_qp](2) = stress_trace * 0.0;
+
 }
 
 void
