@@ -44,9 +44,9 @@ ComputeWeldingIsotropicElasticityTensor::computeQpElasticityTensor()
   Real factor = 1.0;
   // Assign elasticity tensor at a given quad point
   if (_state == WeldStateIndicator::WeldStateType::BEFORE)
-    factor = 0.01;
+    factor = 0.00001;
   else if (_state == WeldStateIndicator::WeldStateType::HEATING)
-    factor = 0.01;
+    factor = 0.00001;
   else if (_state == WeldStateIndicator::WeldStateType::COOLING)
     factor = 1.0;
   else
