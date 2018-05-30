@@ -66,10 +66,13 @@ WeldStateIndicator::finalize()
 
   if (_t < _start_time)
     _state = BEFORE;
-  else if (_min_u < _melting_temp && _t < _end_time)
+  else if (_min_u < _melting_temp && _t < _end_time && _has_melted == false)
     _state = HEATING;
   else if (_min_u >= _melting_temp && _t < _end_time)
+  {
     _state = COOLING;
+    _has_melted = true;
+  }
   else
     _state = AFTER;
 }

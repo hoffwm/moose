@@ -47,7 +47,7 @@ public:
 protected:
   /// Holds the solution at current quadrature points
   const VariableValue & _u;
-
+  bool _has_melted = false;
   Real _min_u;
 
   WeldStateType _state;
